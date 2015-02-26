@@ -1,112 +1,101 @@
 package kylecrowley.cs491b;
 
+import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.content.Intent;
-import android.widget.Toast;
+import android.widget.EditText;
+import android.widget.TextView;
+import org.json.JSONObject;
+import org.json.JSONException;
+import android.util.Log;
 
-import org.apache.http.*;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BufferedHeader;
-import org.json.*;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends ActionBarActivity {
-    int longitude, latitude, radius;
-    String requesturl;
-    HttpGet req;
-    HttpResponse res;
-    JSONObject jsonobj;
-    JSONArray resarray;
-    DefaultHttpClient client;
-    HttpEntity jsonentity;
-    InputStream in;
+    double longitude = 0.0;
+    double latitude = 0.0;
+    double radius = 100.0;
 
     private String APIKey="AIzaSyCeoJkIK5Jgv3pWYQ0VSUy41QFEDE29PME";
+    private TextView tv;
+    private EditText longi;
+    private EditText lati;
+    private EditText radi;
 
+    //http vars
+    private TextView resultText;
+    private String baseUrl = "https://maps.googleapis.com/maps/api/place/search/json?";
+    private String finalUrl = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        requesturl = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + 18.0000 + "," + 100.0000 + "&radius=" + radius + "&key=" + APIKey;
-        System.out.println("Request "+requesturl);
-        client=new DefaultHttpClient();
-        System.out.println("hello");
+        StrictMode.ThreadPolicy policy = new StrictMode();
+        StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
-        req=new HttpGet(requesturl);
-        System.out.println("hello");
-
-        try {
-            res=client.execute(req);
-            StatusLine status = res.getStatusLine();
-            int code = status.getStatusCode();
-            System.out.println(code);
-            if(code!=200)
-            {
-                System.out.println("Request Has not succeeded");
-                finish();
-            }
-
-            jsonentity=res.getEntity();
-            in = jsonentity.getContent();
-
-            jsonobj=new JSONObject(convertToString(in));
-
-
-            resarray = jsonobj.getJSONArray("results");
-
-            if(resarray.length()==0){
-            }
-            else{
-                int len=resarray.length();
-                for(int j=0;j<len;j++)
-                {
-                    Toast.makeText(getApplicationContext(), resarray.getJSONObject(j).getString("name") , Toast.LENGTH_LONG).show();
-                }
-            }
-        } catch (ClientProtocolException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        catch (JSONException e) {
-            e.printStackTrace();
-        }
+        longi = (EditText)findViewById(R.id.editTextLong);
+        lati = (EditText)findViewById(R.id.editTextLat);
+        radi = (EditText)findViewById(R.id.editTextRadius);
+        tv = (TextView) findViewById(R.id.saved_location);
+        resultText = (TextView) findViewById(R.id.resultsDisplay);
     }
+
+    public void buttonGet(View view) {
+        if( longi.getText().toString().length() > 0 ) {
+            longitude = Double.valueOf(longi.getText().toString());
+        }
+        else{ longitude = 100.0;}
+        if( lati.getText().toString().length() > 0 ) {
+            latitude = Double.valueOf(lati.getText().toString());
+        }
+        else{latitude = 18.0;}
+        if( radi.getText().toString().length() > 0 ) {
+            radius = Double.valueOf(radi.getText().toString());
+        }
+        else{radius = 500;}
+
+        tv.setText("Location: " + "\n" +
+                    latitude + "\n" +
+                    longitude + "\n" +
+                    radius);
+    }
+/*
+    public void buttonGetPhone(View view){
+
+    }
+*/
 
     public void buttonSearch(View view) {
-        Intent intent = new Intent(this, Results.class);
+        finalUrl = baseUrl + "location=" + latitude + "," + longitude + "&radius=" + radius + "&key=" + APIKey;
+        // https://maps.googleapis.com/maps/api/place/search/json?location=18.00,100.00&radius=5000&key=AIzaSyCeoJkIK5Jgv3pWYQ0VSUy41QFEDE29PME
+        new LongOperation().execute("");
     }
 
-    private String convertToString(InputStream x)   {
-        BufferedReader br=new BufferedReader(new InputStreamReader(x));
-        StringBuilder jsonstr=new StringBuilder();
-        String line;
-        try{
-            while((line=br.readLine())!=null)
-            {
-                String t=line+"\n";
-                jsonstr.append(t);
+    private class LongOperation extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params){
+            GetMethodEx test = new GetMethodEx();
+            String returned = null;
+
+            try{
+                returned = test.getInternetData();
+            } catch(Exception e){
+                e.printStackTrace();
             }
-            br.close();
-        }catch (IOException e)  {
-            e.printStackTrace();
+            return returned;
         }
-        return jsonstr.toString();
+        protected void onPostExecute(String result){
+            resultText.setText(result);
+        }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

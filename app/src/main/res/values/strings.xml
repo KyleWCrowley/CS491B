@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CS 491B</string>
 
+    <string name="app_name">CS 491B</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="Longitude">Longitude: </string>
@@ -9,4 +10,7 @@
     <string name="search_button">Search</string>
     <string name="get_loc">Retrieve Location</string>
     <string name="title_activity_results">Results</string>
+    <string name="location">Location</string>
+    <string name="title_activity_maps">Map</string>
+
 </resources>

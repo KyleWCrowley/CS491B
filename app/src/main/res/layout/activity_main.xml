@@ -31,7 +31,8 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editTextLat" />
+            android:id="@+id/editTextLat"
+            android:editable="true" />
     </TableRow>
 
     <TableRow
@@ -50,7 +51,8 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editTextLong" />
+            android:id="@+id/editTextLong"
+            android:editable="true" />
     </TableRow>
 
     <TableRow
@@ -69,14 +71,23 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editTextRadius" />
+            android:id="@+id/editTextRadius"
+            android:editable="true" />
     </TableRow>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/get_loc"
-        android:id="@+id/get_location_button" />
+        android:id="@+id/get_location_button"
+        android:longClickable="false"
+        android:onClick="buttonGet" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Location From Phone"
+        android:id="@+id/get_phone_location" />
 
     <Button
         android:layout_width="wrap_content"
@@ -84,5 +95,44 @@
         android:text="@string/search_button"
         android:id="@+id/search_button"
         android:onClick="buttonSearch" />
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/location"
+            android:id="@+id/saved_location"
+            android:layout_column="1" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"></TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="POI&apos;s"
+            android:id="@+id/resultsDisplay"
+            android:layout_column="1" />
+    </TableRow>
 
 </TableLayout>
