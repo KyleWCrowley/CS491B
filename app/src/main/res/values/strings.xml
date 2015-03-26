@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CS 491B</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">POI Finder</string>
     <string name="action_settings">Settings</string>
     <string name="Longitude">Longitude: </string>
     <string name="Latitude">Latitude: </string>
     <string name="Radius">Radius: </string>
     <string name="search_button">Search</string>
-    <string name="get_loc">Retrieve Location</string>
+    <string name="get_loc">Get User Input Location</string>
     <string name="title_activity_results">Results</string>
     <string name="location">Location</string>
     <string name="title_activity_maps">Map</string>
+    <string name="get_loc2">Get Location From Phone</string>
+    <string name="fetch_text">GPS</string>
+    <string name="clear_text">Clear</string>
+    <string name="connection_error">Connection error.</string>
 
 </resources>

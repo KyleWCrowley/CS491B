@@ -1,138 +1,197 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:id="@+id/MainLayout">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="POI Finder"
-        android:id="@+id/textView2"
-        android:password="false"
-        android:phoneNumber="false"
-        android:textAlignment="center" />
-
-    <TableRow
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="120dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="false"
+        android:id="@+id/InputLayout">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/Latitude"
-            android:id="@+id/textViewLat" />
+            android:baselineAligned="false"
+            android:id="@+id/LatitudeLayout">
 
-        <EditText
-            android:layout_width="wrap_content"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Latitude"
+                android:id="@+id/textView" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editTextLat"
+                android:editable="true"
+                android:gravity="center_horizontal"
+                android:text="39.542693" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/editTextLat"
-            android:editable="true" />
-    </TableRow>
+            android:id="@+id/LongitudeLayout"
+            android:layout_below="@+id/LatitudeLayout">
 
-    <TableRow
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Longitude"
+                android:id="@+id/textViewLong" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editTextLong"
+                android:editable="true"
+                android:gravity="center_horizontal"
+                android:text="-119.816873" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/RadiusLayout"
+            android:layout_below="@+id/LongitudeLayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/Radius"
+                android:id="@+id/textViewRadius" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/editTextRadius"
+                android:editable="true"
+                android:gravity="center_horizontal"
+                android:text="1000.0" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TableLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/InputLayout"
+        android:layout_above="@+id/ButtonLayout">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <TableRow
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/Longitude"
-            android:id="@+id/textViewLong" />
+            android:id="@+id/HeaderRow">
 
-        <EditText
+            <TextView
+                android:layout_width="55dp"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Name"
+                android:id="@+id/NameHeader"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:background="@drawable/left"
+                android:textAlignment="center"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Longitude"
+                android:id="@+id/LongHeader"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:background="@drawable/right"
+                android:textAlignment="center"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Latitude"
+                android:id="@+id/LatHeader"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:background="@drawable/right"
+                android:textAlignment="center"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="fill_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="ID"
+                android:id="@+id/IdHeader"
+                android:layout_weight="1"
+                android:textColor="#000000"
+                android:background="@drawable/right"
+                android:textAlignment="center"
+                android:gravity="center_horizontal" />
+        </TableRow>
+
+        <ScrollView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/editTextLong"
-            android:editable="true" />
-    </TableRow>
+            android:layout_height="fill_parent"
+            android:id="@+id/scrollView"
+            android:fillViewport="true">
 
-    <TableRow
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/LinearLayout1">
+
+            </LinearLayout>
+        </ScrollView>
+
+    </TableLayout>
+
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" >
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/ButtonLayout">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/Radius"
-            android:id="@+id/textViewRadius" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/editTextRadius"
-            android:editable="true" />
-    </TableRow>
+            <Button
+                android:background="@drawable/green_button"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/search_button"
+                android:id="@+id/search_button"
+                android:onClick="buttonSearch"
+                style="@style/big_button_text"
+                android:layout_weight="1"></Button>
+        </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/get_loc"
-        android:id="@+id/get_location_button"
-        android:longClickable="false"
-        android:onClick="buttonGet" />
+    </RelativeLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get Location From Phone"
-        android:id="@+id/get_phone_location" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_button"
-        android:id="@+id/search_button"
-        android:onClick="buttonSearch" />
-
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"></TableRow>
-
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/location"
-            android:id="@+id/saved_location"
-            android:layout_column="1" />
-    </TableRow>
-
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"></TableRow>
-
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"></TableRow>
-
-    <TableRow
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="POI&apos;s"
-            android:id="@+id/resultsDisplay"
-            android:layout_column="1" />
-    </TableRow>
-
-</TableLayout>
+</RelativeLayout>
